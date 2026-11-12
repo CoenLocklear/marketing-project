@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Green Room — Draft Day Loyalty</title>
+<meta name="description" content="The Green Room is Draft Day's loyalty program. Join free, get 500 points, earn more with your crew.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&amp;family=Graduate&amp;family=Doto:wght@700;900&amp;family=Barlow:wght@400;500;600;700&amp;family=Barlow+Condensed:wght@600;700&amp;display=swap">
+<style>
+body{margin:0;background:#071A1F}
+html{scroll-behavior:smooth}
+a{color:#F7DFB6}a:hover{color:#FFFFFF}
+summary{cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+details[open] .gr-plus{transform:rotate(45deg)}
+.gr-plus{transition:transform .2s}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #FFB347;outline-offset:3px}
+@keyframes grMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.gr-marquee{display:flex;width:max-content;animation:grMarquee 38s linear infinite}
+.gr-marquee-fast{display:flex;width:max-content;animation:grMarquee 22s linear infinite}
+@keyframes grFloat{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-16px) rotate(var(--r,0deg))}}
+.gr-float{animation:grFloat 6s ease-in-out infinite}
+.gr-float-slow{animation:grFloat 9s ease-in-out infinite}
+@keyframes grBeam{0%,100%{opacity:.45}50%{opacity:.85}}
+.gr-beam{animation:grBeam 5s ease-in-out infinite}
+@keyframes grBlink{50%{opacity:.2}}
+.gr-blink{animation:grBlink 1s steps(1) infinite}
+@keyframes grShine{0%{transform:translateX(-160%) skewX(-20deg)}55%,100%{transform:translateX(320%) skewX(-20deg)}}
+.gr-shine{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:inherit}
+.gr-shine::after{content:"";position:absolute;top:0;bottom:0;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:grShine 3.4s ease-in-out infinite}
+@keyframes grPour{0%{transform:scaleY(.08)}75%,100%{transform:scaleY(1)}}
+.gr-pour{transform-box:fill-box;transform-origin:bottom;animation:grPour 4.5s ease-out infinite}
+@keyframes grFill{from{width:0}}
+.gr-fill{animation:grFill 2.4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grArc{from{stroke-dashoffset:520}to{stroke-dashoffset:0}}
+.gr-arc{stroke-dasharray:520;animation:grArc 3.2s ease-out infinite}
+@keyframes grPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,179,71,.7)}50%{box-shadow:0 0 0 16px rgba(255,179,71,0)}}
+.gr-pulse{animation:grPulse 1.8s infinite}
+.gr-led{background-color:#05080D;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.6px);background-size:4px 4px}
+.gr-scan{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 2px,transparent 2px 4px)}
+.gr-glow{text-shadow:0 0 10px rgba(255,179,71,.75),0 0 28px rgba(255,140,40,.35)}
+.gr-lift{transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.gr-lift:hover{transform:translateY(-12px) rotate(0deg) scale(1.02)!important}
+@media (prefers-reduced-motion:reduce){*,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div style="font-family: 'Barlow', system-ui, sans-serif; color: #F7DFB6; background: #071A1F; width: 100%; overflow-x: hidden">
+
+<!-- ================= SCOREBOARD HEADER ================= -->
+<header class="gr-led" style="position: relative; border-bottom: 4px solid #D9772B">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px">
+    <a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+      <div style="width: 52px; height: 52px; border: 2px dashed #D9772B; border-radius: 8px; display: flex; align-items: center; justify-content: center; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .06em; line-height: 1.1; color: #F7DFB6">DRAFT DAY<br>LOGO</div>
+      <div style="display: flex; flex-direction: column">
+        <span style="font-family: 'Teko', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 30px; line-height: .8; letter-spacing: .03em; color: #F7DFB6">DRAFT DAY</span>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .22em; color: #FFB347">THE GREEN ROOM</span>
+      </div>
+    </a>
+    <nav aria-label="Sections" style="display: flex; flex-wrap: wrap; align-items: center; gap: 2px 22px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: .08em; text-transform: uppercase">
+      <a href="#how" style="text-decoration: none; padding: 10px 0">How it works</a>
+      <a href="#earn" style="text-decoration: none; padding: 10px 0">Earn</a>
+      <a href="#rewards" style="text-decoration: none; padding: 10px 0">Rewards</a>
+      <a href="#tiers" style="text-decoration: none; padding: 10px 0">Tiers</a>
+      <a href="#rules" style="text-decoration: none; padding: 10px 0">Rules</a>
+      <a href="#join" style="text-decoration: none; background: #D9772B; color: #1B2A41; padding: 12px 18px; border-radius: 4px">Join free</a>
+    </nav>
+  </div>
+
+  <!-- the scoreboard -->
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px 14px">
+    <div role="img" aria-label="Scoreboard: Home, Your Crew, 500. Away, The Group Chat, 0. On the clock. Round 1, Pick 1." style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 6px; background: #1B2A41; border: 3px solid #2A3A55; border-radius: 8px; padding: 6px">
+      <div style="background: #05080D; border-radius: 4px; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px">
+        <div style="display: flex; flex-direction: column"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .2em; color: #8FA3BF">HOME</span><span style="font-family: 'Teko', sans-serif; font-weight: 600; font-size: 24px; line-height: 1">YOUR CREW</span></div>
+        <span class="gr-glow" style="font-family: 'Doto', 'Courier New', monospace; font-weight: 900; font-size: 40px; line-height: 1; color: #FFB347">500</span>
+      </div>
+      <div style="background: #05080D; border-radius: 4px; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px">
+        <div style="display: flex; flex-direction: column"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .2em; color: #8FA3BF">AWAY</span><span style="font-family: 'Teko', sans-serif; font-weight: 600; font-size: 24px; line-height: 1">THE GROUP CHAT</span></div>
+        <span style="font-family: 'Doto', 'Courier New', monospace; font-weight: 900; font-size: 40px; line-height: 1; color: #5C6B82">000</span>
+      </div>
+      <div style="background: #05080D; border-radius: 4px; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; box-shadow: inset 0 0 0 2px #D9772B">
+        <div style="display: flex; flex-direction: column"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .2em; color: #FFB347"><span class="gr-blink">●</span> LIVE</span><span style="font-family: 'Teko', sans-serif; font-weight: 600; font-size: 24px; line-height: 1">ON THE CLOCK</span></div>
+        <span class="gr-glow" style="font-family: 'Doto', 'Courier New', monospace; font-weight: 900; font-size: 40px; line-height: 1; color: #FF6B3D"><span data-clock>04:59</span></span>
+      </div>
+      <div style="background: #05080D; border-radius: 4px; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px">
+        <div style="display: flex; flex-direction: column"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .2em; color: #8FA3BF">ROUND</span><span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 30px; line-height: 1; color: #F7DFB6">01</span></div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end"><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .2em; color: #8FA3BF">PICK</span><span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 30px; line-height: 1; color: #F7DFB6">01</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- moving LED crawl -->
+  <div aria-hidden="true" style="background: #05080D; border-top: 1px solid #2A3A55; overflow: hidden; padding: 10px 0">
+    <div class="gr-marquee" style="font-family: 'Doto', 'Courier New', monospace; font-weight: 900; font-size: 24px; letter-spacing: .06em; color: #FFB347; white-space: nowrap">
+      <span class="gr-glow" style="padding-right: 48px">ON THE CLOCK ★ ROOKIES WELCOME ★ 500 TO START ★ CREW BONUS 1.5X WHEN 4+ PLAY ★ CALL-UP BONUS +250 EACH ★ FRANCHISE IS EARNED ★</span>
+      <span class="gr-glow" style="padding-right: 48px">ON THE CLOCK ★ ROOKIES WELCOME ★ 500 TO START ★ CREW BONUS 1.5X WHEN 4+ PLAY ★ CALL-UP BONUS +250 EACH ★ FRANCHISE IS EARNED ★</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO: STADIUM ================= -->
+<section id="top" style="position: relative; overflow: hidden; background: radial-gradient(ellipse at 50% 0%, #0E4A47 0%, #071A1F 62%)">
+  <!-- light rigs + beams -->
+  <div aria-hidden="true" style="position: absolute; top: 18px; left: 6%; width: 96px; height: 40px; background-image: radial-gradient(circle, #FFF6DD 3px, transparent 4px); background-size: 16px 13px; filter: drop-shadow(0 0 10px #FFE8B0)"></div>
+  <div aria-hidden="true" style="position: absolute; top: 18px; right: 6%; width: 96px; height: 40px; background-image: radial-gradient(circle, #FFF6DD 3px, transparent 4px); background-size: 16px 13px; filter: drop-shadow(0 0 10px #FFE8B0)"></div>
+  <div aria-hidden="true" class="gr-beam" style="position: absolute; top: 40px; left: calc(6% + 18px); width: 520px; height: 140%; background: linear-gradient(180deg, rgba(255,236,190,.32), rgba(255,236,190,0) 70%); clip-path: polygon(6% 0, 12% 0, 100% 100%, 0 100%); transform: rotate(-24deg); transform-origin: top left"></div>
+  <div aria-hidden="true" class="gr-beam" style="position: absolute; top: 40px; right: calc(6% + 18px); width: 520px; height: 140%; background: linear-gradient(180deg, rgba(255,236,190,.32), rgba(255,236,190,0) 70%); clip-path: polygon(88% 0, 94% 0, 100% 100%, 0 100%); transform: rotate(24deg); transform-origin: top right; animation-delay: 2.5s"></div>
+  <!-- perspective field -->
+  <div aria-hidden="true" style="position: absolute; left: -10%; right: -10%; bottom: 0; height: 260px; background-color: #0B5145; background-image: repeating-linear-gradient(90deg, rgba(247,223,182,.35) 0 3px, transparent 3px 140px), repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 70px, transparent 70px 140px); transform: perspective(520px) rotateX(62deg); transform-origin: bottom; -webkit-mask-image: linear-gradient(to top, #000 35%, transparent); mask-image: linear-gradient(to top, #000 35%, transparent)"></div>
+  <!-- ghost helmets -->
+  <svg aria-hidden="true" viewBox="0 0 300 220" style="position: absolute; left: -60px; bottom: 40px; width: 520px; opacity: .07"><path d="M28 150 C18 78 78 18 158 18 C226 18 272 62 276 118 L278 140 L234 140 C223 140 216 148 216 158 L216 186 L118 190 C66 192 33 180 28 150 Z" fill="#F7DFB6"></path><path d="M216 150 L298 140 M222 176 L294 172 M294 134 L294 204 M226 202 L294 204 M250 140 L252 202" fill="none" stroke="#F7DFB6" stroke-width="7" stroke-linecap="round"></path></svg>
+  <!-- floating sports objects -->
+  <svg aria-hidden="true" class="gr-float" viewBox="0 0 100 100" style="--r: 12deg; position: absolute; left: 44%; top: 70px; width: 58px; opacity: .9"><defs><pattern id="grDimp" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="1.8" fill="#CFC6B3"></circle></pattern></defs><circle cx="50" cy="50" r="46" fill="#F7F3EA"></circle><circle cx="50" cy="50" r="46" fill="url(#grDimp)"></circle></svg>
+  <svg aria-hidden="true" class="gr-float-slow" viewBox="0 0 100 100" style="--r: -18deg; position: absolute; left: 3%; top: 46%; width: 76px; opacity: .85"><circle cx="50" cy="50" r="46" fill="#D9772B"></circle><path d="M50 4 V96 M4 50 H96 M18 18 C40 38 40 62 18 82 M82 18 C60 38 60 62 82 82" fill="none" stroke="#1B2A41" stroke-width="3.5"></path></svg>
+  <svg aria-hidden="true" class="gr-float" viewBox="0 0 100 100" style="--r: 8deg; position: absolute; right: 4%; bottom: 120px; width: 70px; opacity: .85; animation-delay: 1.5s"><circle cx="50" cy="50" r="46" fill="#F7F3EA"></circle><polygon points="50,32 66,44 60,63 40,63 34,44" fill="#1B2A41"></polygon><path d="M50 32 V8 M66 44 L88 36 M60 63 L74 84 M40 63 L26 84 M34 44 L12 36" stroke="#1B2A41" stroke-width="3"></path></svg>
+  <svg aria-hidden="true" class="gr-float-slow" viewBox="0 0 100 100" style="--r: -30deg; position: absolute; left: 36%; bottom: 70px; width: 50px; opacity: .8; animation-delay: 3s"><circle cx="50" cy="50" r="46" fill="#F7F3EA"></circle><path d="M22 14 C40 36 40 64 22 86 M78 14 C60 36 60 64 78 86" fill="none" stroke="#D9772B" stroke-width="3" stroke-dasharray="5 4"></path></svg>
+
+  <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 96px 24px 150px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 56px; align-items: center">
+    <div style="display: flex; flex-direction: column; gap: 26px">
+      <span style="display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .22em; color: #1B2A41; background: #F7DFB6; padding: 6px 14px; transform: skewX(-12deg)">DRAFT DAY'S LOYALTY PROGRAM</span>
+      <h1 style="margin: 0; font-family: 'Teko', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(76px, 10vw, 156px); line-height: .78; text-transform: uppercase; color: #F7DFB6; transform: skewX(-6deg); text-shadow: 0 6px 0 rgba(0,0,0,.35)">Welcome to<br><span style="color: #D9772B">The Green</span><br><span style="color: #D9772B">Room.</span></h1>
+      <p style="margin: 0; max-width: 520px; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.5">On draft night, the Green Room is where the top prospects wait to get called up. Every member starts here. Bring the crew, keep coming back, and watch the night keep getting better.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center">
+        <a href="#join" class="gr-pulse" style="background: #D9772B; color: #1B2A41; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: .06em; text-transform: uppercase; padding: 18px 28px; border-radius: 4px">Join free, get 500 points</a>
+        <a href="#how" style="color: #F7DFB6; text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: .06em; text-transform: uppercase; padding: 16px 26px; border: 2px solid rgba(247,223,182,.6); border-radius: 4px">See how it works</a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 28px; padding-top: 6px">
+        <div style="display: flex; flex-direction: column"><span style="font-family: 'Teko', sans-serif; font-weight: 700; font-size: 44px; line-height: .9; color: #FFB347">500</span><span style="font-size: 14px">points to start</span></div>
+        <div style="display: flex; flex-direction: column"><span style="font-family: 'Teko', sans-serif; font-weight: 700; font-size: 44px; line-height: .9; color: #FFB347">1.5X</span><span style="font-size: 14px">when 4+ play</span></div>
+        <div style="display: flex; flex-direction: column"><span style="font-family: 'Teko', sans-serif; font-weight: 700; font-size: 44px; line-height: .9; color: #FFB347">30 SEC</span><span style="font-size: 14px">to join, free</span></div>
+      </div>
+    </div>
+
+    <!-- HERO JUMBOTRON -->
+    <div style="position: relative; padding-top: 46px">
+      <div aria-hidden="true" style="position: absolute; top: 0; left: 8%; right: 8%; height: 16px; background: repeating-linear-gradient(45deg, #2A3A55 0 6px, #1B2A41 6px 12px); border: 2px solid #3A4C6B; border-radius: 3px"></div>
+      <div aria-hidden="true" style="position: absolute; top: 16px; left: 20%; width: 3px; height: 30px; background: #3A4C6B"></div>
+      <div aria-hidden="true" style="position: absolute; top: 16px; right: 20%; width: 3px; height: 30px; background: #3A4C6B"></div>
+      <div style="background: #1B2A41; border: 2px solid #3A4C6B; border-radius: 12px; padding: 12px; box-shadow: 0 0 80px rgba(255,160,60,.22), 0 40px 70px rgba(0,0,0,.55)">
+        <div style="display: flex; justify-content: space-between; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .3em; color: #8FA3BF; padding: 0 4px 8px"><span>DRAFT DAY ★ JUMBOTRON</span><span><span class="gr-blink" style="color: #FF6B3D">●</span> LIVE</span></div>
+        <div class="gr-led" style="position: relative; overflow: hidden; border-radius: 6px; padding: clamp(18px, 3vw, 30px); display: flex; flex-direction: column; gap: 18px">
+          <div class="gr-scan"></div>
+          <div style="position: relative; display: flex; justify-content: space-between; align-items: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: .2em; font-size: 14px; color: #FFB347"><span>NOW ON THE CLOCK</span><span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 22px; letter-spacing: .05em"><span data-clock>04:59</span></span></div>
+          <div style="position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 18px">
+            <svg role="img" aria-label="Draft Day football helmet" class="gr-float" viewBox="0 0 300 220" style="--r: -4deg; width: clamp(150px, 40%, 230px); flex: 0 0 auto; filter: drop-shadow(0 0 18px rgba(217,119,43,.45))"><path d="M28 150 C18 78 78 18 158 18 C226 18 272 62 276 118 L278 140 L234 140 C223 140 216 148 216 158 L216 186 L118 190 C66 192 33 180 28 150 Z" fill="#D9772B"></path><path d="M62 44 C110 16 188 14 238 52" fill="none" stroke="#0E4A47" stroke-width="18" stroke-linecap="round"></path><path d="M62 44 C110 16 188 14 238 52" fill="none" stroke="#F7DFB6" stroke-width="4" stroke-linecap="round"></path><path d="M70 74 C88 56 116 48 146 48" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="7" stroke-linecap="round"></path><circle cx="150" cy="134" r="13" fill="#05080D"></circle><path d="M216 150 L298 140 M222 176 L294 172 M294 134 L294 204 M226 202 L294 204 M252 141 L254 202" fill="none" stroke="#F7DFB6" stroke-width="7" stroke-linecap="round"></path><path d="M180 190 L222 214" stroke="#F7DFB6" stroke-width="6" stroke-linecap="round"></path></svg>
+            <div style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 160px">
+              <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: .2em; color: #F7DFB6">THE PICK IS IN:</span>
+              <span class="gr-glow" style="font-family: 'Doto', 'Courier New', monospace; font-weight: 900; font-size: clamp(40px, 5vw, 64px); line-height: .95; color: #FFB347">YOUR<br>CREW</span>
+            </div>
+          </div>
+          <div style="position: relative; border-top: 1px dashed rgba(255,179,71,.4); padding-top: 14px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px"><span style="font-family: 'Graduate', serif; font-size: 22px; color: #F7DFB6">ROOKIE</span><span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 30px; color: #FFB347">000500 PTS</span></div>
+            <div style="height: 12px; background: #1F2C42; border-radius: 6px; overflow: hidden"><div class="gr-fill" style="width: 50%; height: 100%; background: linear-gradient(90deg, #D9772B, #FFB347); border-radius: 6px"></div></div>
+            <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .12em; color: #F7DFB6">500 PTS TO A FREE POUR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how" style="position: relative; overflow: hidden; background: #F7DFB6; color: #1B2A41">
+  <div aria-hidden="true" style="position: absolute; top: 30px; right: -40px; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 340px; line-height: .8; color: transparent; -webkit-text-stroke: 2px rgba(14,74,71,.12); pointer-events: none">DRAFT</div>
+  <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 110px 24px; display: flex; flex-direction: column; gap: 52px">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .22em; color: #934615">HOW IT WORKS</span>
+      <h2 style="margin: 0; font-family: 'Teko', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(60px, 7.5vw, 112px); line-height: .8; text-transform: uppercase; transform: skewX(-6deg)">Three rounds.<br><span style="color: #0E4A47">One crew.</span></h2>
+    </div>
+
+    <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 22px">
+      <li class="gr-lift" style="background: #0E4A47; color: #F7DFB6; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column">
+        <div style="height: 190px; position: relative; background: radial-gradient(circle at 50% 120%, #00625A, #0E4A47 70%); display: flex; align-items: center; justify-content: center">
+          <svg aria-hidden="true" viewBox="0 0 200 160" style="width: 200px"><rect x="64" y="14" width="72" height="134" rx="12" fill="#1B2A41" stroke="#F7DFB6" stroke-width="3"></rect><rect x="72" y="30" width="56" height="96" rx="4" fill="#05080D"></rect><text x="100" y="72" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="700" font-size="11" fill="#8FA3BF" letter-spacing="1.5">WELCOME</text><text x="100" y="100" text-anchor="middle" font-family="Doto, monospace" font-weight="900" font-size="24" fill="#FFB347">+500</text><circle cx="160" cy="44" r="22" fill="#D9772B"></circle><text x="160" y="50" text-anchor="middle" font-family="Teko, sans-serif" font-weight="700" font-size="20" fill="#1B2A41">PTS</text></svg>
+          <span style="position: absolute; top: 14px; left: 16px; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 56px; line-height: 1; color: transparent; -webkit-text-stroke: 2px #F7DFB6">01</span>
+        </div>
+        <div style="padding: 24px 26px 30px; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .22em; color: #FFB347">ROUND 1</span>
+          <h3 style="margin: 0; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 50px; line-height: .85; text-transform: uppercase">Join</h3>
+          <p style="margin: 0; font-size: 17px; line-height: 1.55">Sign up with your phone number in about 30 seconds. You walk in with 500 points, so your first pour is basically on us.</p>
+        </div>
+      </li>
+      <li class="gr-lift" style="background: #1B2A41; color: #F7DFB6; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column">
+        <div style="height: 190px; position: relative; background: radial-gradient(circle at 50% 120%, #2A3A55, #1B2A41 70%); display: flex; align-items: center; justify-content: center">
+          <svg aria-hidden="true" viewBox="0 0 220 160" style="width: 220px"><g fill="#0E4A47" stroke="#F7DFB6" stroke-width="3"><path d="M20 70 L42 60 C46 68 54 68 58 60 L80 70 L92 92 L80 98 L80 140 L20 140 L20 98 L8 92 Z"></path><path d="M140 70 L162 60 C166 68 174 68 178 60 L200 70 L212 92 L200 98 L200 140 L140 140 L140 98 L128 92 Z"></path></g><path d="M80 66 L102 56 C106 64 114 64 118 56 L140 66 L152 88 L140 94 L140 146 L80 146 L80 94 L68 88 Z" fill="#D9772B" stroke="#F7DFB6" stroke-width="3"></path><text x="50" y="122" text-anchor="middle" font-family="Graduate, serif" font-size="26" fill="#F7DFB6">7</text><text x="110" y="128" text-anchor="middle" font-family="Graduate, serif" font-size="30" fill="#1B2A41">23</text><text x="170" y="122" text-anchor="middle" font-family="Graduate, serif" font-size="26" fill="#F7DFB6">44</text></svg>
+          <span style="position: absolute; top: 14px; left: 16px; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 56px; line-height: 1; color: transparent; -webkit-text-stroke: 2px #F7DFB6">02</span>
+        </div>
+        <div style="padding: 24px 26px 30px; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .22em; color: #FFB347">ROUND 2</span>
+          <h3 style="margin: 0; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 50px; line-height: .85; text-transform: uppercase">Play with your crew</h3>
+          <p style="margin: 0; font-size: 17px; line-height: 1.55">Book a bay, drop the link in the group chat, split the cost. Every dollar on bay time, food and the beer wall earns points. Four or more members? Everybody earns 1.5x.</p>
+        </div>
+      </li>
+      <li class="gr-lift" style="background: #D9772B; color: #1B2A41; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column">
+        <div style="height: 190px; position: relative; background: radial-gradient(circle at 50% 120%, #F29A4A, #D9772B 70%); display: flex; align-items: center; justify-content: center">
+          <svg aria-hidden="true" viewBox="0 0 200 160" style="width: 190px"><path d="M66 22 H134 V60 C134 82 118 96 100 96 C82 96 66 82 66 60 Z" fill="#1B2A41"></path><path d="M66 32 H44 C44 56 56 66 70 68 M134 32 H156 C156 56 144 66 130 68" fill="none" stroke="#1B2A41" stroke-width="7"></path><rect x="92" y="96" width="16" height="22" fill="#1B2A41"></rect><rect x="70" y="118" width="60" height="14" rx="3" fill="#1B2A41"></rect><rect x="60" y="132" width="80" height="16" rx="3" fill="#0E4A47"></rect><text x="100" y="66" text-anchor="middle" font-family="Teko, sans-serif" font-weight="700" font-size="30" fill="#FFB347">GR</text><path d="M30 20 l4 8 8 1 -6 6 2 8 -8 -4 -8 4 2 -8 -6 -6 8 -1 Z M170 30 l3 6 6 1 -4 4 1 6 -6 -3 -6 3 1 -6 -4 -4 6 -1 Z" fill="#F7DFB6"></path></svg>
+          <span style="position: absolute; top: 14px; left: 16px; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 56px; line-height: 1; color: transparent; -webkit-text-stroke: 2px #1B2A41">03</span>
+        </div>
+        <div style="padding: 24px 26px 30px; display: flex; flex-direction: column; gap: 10px">
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .22em">ROUND 3</span>
+          <h3 style="margin: 0; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 50px; line-height: .85; text-transform: uppercase">Get called up</h3>
+          <p style="margin: 0; font-size: 17px; line-height: 1.55; font-weight: 500">Cash in for pours, bay time and Crew Nights. Keep showing up and climb the board from Rookie to Starter to Franchise.</p>
+        </div>
+      </li>
+    </ol>
+
+    <!-- THE VENUE -->
+    <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 20px">
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .22em; color: #934615">THE VENUE</span>
+      <h2 style="margin: 0; font-family: 'Teko', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(48px, 5.5vw, 80px); line-height: .82; text-transform: uppercase; transform: skewX(-6deg)">Where you earn it.</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px">
+      <figure style="margin: 0; background: #071A1F; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column">
+        <svg role="img" aria-label="Illustration of a private simulator bay: a big screen showing a golf hole with a ball in flight, a hitting mat and a lounge couch" viewBox="0 0 560 330" style="width: 100%; display: block">
+          <rect width="560" height="330" fill="#071A1F"></rect>
+          <rect x="30" y="18" width="500" height="10" rx="5" fill="#FFB347" opacity=".85"></rect>
+          <text x="280" y="27" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="700" font-size="9" letter-spacing="4" fill="#1B2A41">BAY 04</text>
+          <rect x="40" y="38" width="480" height="196" rx="6" fill="#00625A"></rect>
+          <rect x="40" y="38" width="480" height="96" rx="6" fill="#0E4A47"></rect>
+          <path d="M40 134 L520 134 L520 234 L40 234 Z" fill="#2E7A55"></path>
+          <path d="M160 234 C230 190 300 160 380 140 L470 134 L520 150 L520 234 Z" fill="#3C9466"></path>
+          <ellipse cx="410" cy="146" rx="44" ry="10" fill="#57B07A"></ellipse>
+          <path d="M412 146 V102" stroke="#F7DFB6" stroke-width="3"></path><path d="M412 102 L438 110 L412 118 Z" fill="#D9772B"></path>
+          <path d="M60 134 l14 -40 14 40 Z M86 134 l12 -32 12 32 Z M470 134 l12 -30 12 30 Z" fill="#0B3B33"></path>
+          <path class="gr-arc" d="M270 300 C300 120 380 70 412 142" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8"></path>
+          <rect x="190" y="268" width="180" height="40" rx="4" fill="#0B5145"></rect>
+          <circle cx="270" cy="296" r="6" fill="#F7F3EA"></circle>
+          <rect x="18" y="250" width="120" height="58" rx="10" fill="#D9772B"></rect><rect x="18" y="236" width="120" height="24" rx="10" fill="#B9621F"></rect>
+          <rect x="430" y="258" width="90" height="50" rx="6" fill="#1B2A41"></rect><text x="475" y="281" text-anchor="middle" font-family="Doto, monospace" font-weight="900" font-size="14" fill="#FFB347">287</text><text x="475" y="298" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="700" font-size="9" letter-spacing="2" fill="#8FA3BF">YDS</text>
+        </svg>
+        <figcaption style="padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 6px; color: #F7DFB6">
+          <span style="font-family: 'Teko', sans-serif; font-weight: 700; font-size: 34px; line-height: .9; text-transform: uppercase">Your private bay</span>
+          <span style="font-size: 16px; line-height: 1.5">Golf and multi-sport games on the big screen, up to 6 per bay. Food comes to you.</span>
+        </figcaption>
+      </figure>
+      <figure style="margin: 0; background: #071A1F; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column">
+        <svg role="img" aria-label="Illustration of the self-pour beer wall: four taps with digital labels, and a glass filling under one tap" viewBox="0 0 560 330" style="width: 100%; display: block">
+          <defs>
+            <pattern id="grTile" width="40" height="20" patternUnits="userSpaceOnUse"><rect width="40" height="20" fill="#0E4A47"></rect><path d="M0 0 H40 M0 10 H40 M20 0 V10 M0 10 V20 M40 10 V20" stroke="#00625A" stroke-width="1.5"></path></pattern>
+            <clipPath id="grGlass"><path d="M186 206 H238 L232 292 H192 Z"></path></clipPath>
+          </defs>
+          <rect width="560" height="330" fill="url(#grTile)"></rect>
+          <rect x="0" y="0" width="560" height="30" fill="#05080D"></rect>
+          <text x="280" y="20" text-anchor="middle" font-family="Doto, monospace" font-weight="900" font-size="14" fill="#FFB347" letter-spacing="2">SELF-POUR BEER WALL</text>
+          <g font-family="Barlow Condensed, sans-serif" font-weight="700" text-anchor="middle">
+            <rect x="52" y="48" width="96" height="46" rx="4" fill="#05080D"></rect><text x="100" y="68" font-size="15" fill="#F7DFB6">LAGER</text><text x="100" y="86" font-size="12" fill="#FFB347">4.8%</text>
+            <rect x="164" y="48" width="96" height="46" rx="4" fill="#05080D"></rect><text x="212" y="68" font-size="15" fill="#F7DFB6">HAZY IPA</text><text x="212" y="86" font-size="12" fill="#FFB347">6.5%</text>
+            <rect x="276" y="48" width="96" height="46" rx="4" fill="#05080D"></rect><text x="324" y="68" font-size="15" fill="#F7DFB6">SOUR</text><text x="324" y="86" font-size="12" fill="#FFB347">5.2%</text>
+            <rect x="388" y="48" width="96" height="46" rx="4" fill="#05080D"></rect><text x="436" y="68" font-size="15" fill="#F7DFB6">CIDER</text><text x="436" y="86" font-size="12" fill="#FFB347">5.0%</text>
+          </g>
+          <g>
+            <rect x="93" y="104" width="14" height="52" rx="5" fill="#D9772B"></rect><rect x="205" y="104" width="14" height="52" rx="5" fill="#F7DFB6"></rect><rect x="317" y="104" width="14" height="52" rx="5" fill="#D9772B"></rect><rect x="429" y="104" width="14" height="52" rx="5" fill="#F7DFB6"></rect>
+            <rect x="80" y="156" width="40" height="16" rx="4" fill="#B8C2CC"></rect><rect x="192" y="156" width="40" height="16" rx="4" fill="#B8C2CC"></rect><rect x="304" y="156" width="40" height="16" rx="4" fill="#B8C2CC"></rect><rect x="416" y="156" width="40" height="16" rx="4" fill="#B8C2CC"></rect>
+            <rect x="96" y="172" width="8" height="20" fill="#8F9AA6"></rect><rect x="208" y="172" width="8" height="20" fill="#8F9AA6"></rect><rect x="320" y="172" width="8" height="20" fill="#8F9AA6"></rect><rect x="432" y="172" width="8" height="20" fill="#8F9AA6"></rect>
+          </g>
+          <rect x="210" y="192" width="4" height="70" fill="#F2B544" opacity=".9" class="gr-blink"></rect>
+          <g clip-path="url(#grGlass)"><rect class="gr-pour" x="186" y="214" width="52" height="78" fill="#F2B544"></rect><rect x="186" y="206" width="52" height="12" fill="#FFF6DD"></rect></g>
+          <path d="M186 206 H238 L232 292 H192 Z" fill="none" stroke="#F7DFB6" stroke-width="3"></path>
+          <rect x="40" y="296" width="480" height="12" rx="3" fill="#8F9AA6"></rect>
+          <rect x="474" y="200" width="44" height="60" rx="6" fill="#1B2A41"></rect><text x="496" y="226" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="700" font-size="9" fill="#F7DFB6">TAP</text><text x="496" y="238" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="700" font-size="9" fill="#F7DFB6">TO POUR</text><circle cx="496" cy="250" r="4" fill="#57B07A"></circle>
+        </svg>
+        <figcaption style="padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 6px; color: #F7DFB6">
+          <span style="font-family: 'Teko', sans-serif; font-weight: 700; font-size: 34px; line-height: .9; text-transform: uppercase">The self-pour beer wall</span>
+          <span style="font-size: 16px; line-height: 1.5">Tap, pour, earn. Every pour counts toward your next reward.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EARN ================= -->
+<section id="earn" style="position: relative; overflow: hidden; background: #071A1F">
+  <div aria-hidden="true" style="position: absolute; inset: 0; background-image: repeating-linear-gradient(90deg, rgba(247,223,182,.04) 0 2px, transparent 2px 160px)"></div>
+  <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 110px 24px; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .22em; color: #FFB347">EARN</span>
+        <h2 style="margin: 0; font-family: 'Teko', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(60px, 7.5vw, 112px); line-height: .8; text-transform: uppercase; transform: skewX(-6deg)">You earn more<br><span style="color: #D9772B">together.</span></h2>
+      </div>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap">
+        <div style="border: 2px solid #2A3A55; border-radius: 10px; padding: 14px 20px; display: flex; flex-direction: column"><span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 44px; line-height: 1; color: #FFB347">10</span><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .14em">PTS PER $1 SPENT</span></div>
+        <div style="border: 2px solid #2A3A55; border-radius: 10px; padding: 14px 20px; display: flex; flex-direction: column"><span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 44px; line-height: 1; color: #FFB347">+500</span><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .14em">JUST FOR JOINING</span></div>
+      </div>
+    </div>
+    <p style="margin: -20px 0 0; max-width: 720px; font-size: 18px; line-height: 1.55">Bay time, food and the beer wall all count. Everyone earns on their own account, and points never expire as long as you visit at least once a year.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px">
+      <!-- crew bonus -->
+      <article style="position: relative; overflow: hidden; background: #D9772B; color: #1B2A41; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 18px">
+        <span aria-hidden="true" style="position: absolute; right: -20px; bottom: -60px; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 300px; line-height: 1; color: rgba(27,42,65,.12)">1.5X</span>
+        <span style="position: relative; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .22em">BONUS · CREW</span>
+        <div style="position: relative; display: flex; gap: 10px; flex-wrap: wrap" aria-hidden="true">
+          <span style="width: 64px; height: 64px; border-radius: 50%; background: #1B2A41; color: #F7DFB6; display: flex; align-items: center; justify-content: center; font-family: 'Graduate', serif; font-size: 24px">07</span>
+          <span style="width: 64px; height: 64px; border-radius: 50%; background: #1B2A41; color: #F7DFB6; display: flex; align-items: center; justify-content: center; font-family: 'Graduate', serif; font-size: 24px">12</span>
+          <span style="width: 64px; height: 64px; border-radius: 50%; background: #1B2A41; color: #F7DFB6; display: flex; align-items: center; justify-content: center; font-family: 'Graduate', serif; font-size: 24px">23</span>
+          <span style="width: 64px; height: 64px; border-radius: 50%; background: #0E4A47; color: #F7DFB6; display: flex; align-items: center; justify-content: center; font-family: 'Graduate', serif; font-size: 24px; box-shadow: 0 0 0 4px #F7DFB6">44</span>
+        </div>
+        <h3 style="position: relative; margin: 0; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 64px; line-height: .8; text-transform: uppercase">Crew Bonus: 1.5x</h3>
+        <p style="position: relative; margin: 0; font-size: 18px; line-height: 1.5; font-weight: 500; max-width: 440px">Get 4 or more members in the same bay and everyone earns 1.5x points that night. Not just the person who booked. Everyone.</p>
+      </article>
+      <!-- call-up bonus -->
+      <article style="background: #F7DFB6; color: #1B2A41; border-radius: 16px; padding: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 24px; align-items: center">
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .22em; color: #934615">BONUS · REFERRAL</span>
+          <h3 style="margin: 0; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 64px; line-height: .8; text-transform: uppercase">Call-Up Bonus: <span style="color: #0E4A47">+250</span></h3>
+          <p style="margin: 0; font-size: 18px; line-height: 1.5; font-weight: 500">When a friend joins through your group-chat booking link, you both get 250 points.</p>
+        </div>
+        <div role="img" aria-label="Group chat mock: Maya shares a bay booking link, Sam joins through it and both get 250 points" style="background: #1B2A41; border-radius: 26px; padding: 12px; border: 3px solid #0E4A47">
+          <div style="background: #0B1320; border-radius: 16px; padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; font-size: 14px; line-height: 1.35">
+            <span style="text-align: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .16em; color: #8FA3BF">THURSDAY CREW (6)</span>
+            <div style="align-self: flex-start; max-width: 85%; background: #2A3A55; color: #F7DFB6; padding: 9px 12px; border-radius: 14px 14px 14px 4px">Bay 4 booked, Thu 8pm. Join + split here:</div>
+            <div style="align-self: flex-start; max-width: 85%; background: #0E4A47; color: #F7DFB6; padding: 10px 12px; border-radius: 12px; border: 1px solid #00625A; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Teko', sans-serif; font-weight: 600; font-size: 20px; line-height: 1">DRAFT DAY · BAY 04</span><span style="font-size: 12px; color: #D8CBA9">Tap to join · $12.50/person</span></div>
+            <div style="align-self: flex-end; max-width: 85%; background: #D9772B; color: #1B2A41; padding: 9px 12px; border-radius: 14px 14px 4px 14px; font-weight: 600">I'm in. First time!</div>
+            <div style="align-self: center; background: rgba(255,179,71,.14); color: #FFB347; padding: 6px 12px; border-radius: 20px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .08em">SAM JOINED · +250 YOU · +250 SAM</div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- estimator as scoreboard -->
+    <div style="background: #1B2A41; border: 3px solid #2A3A55; border-radius: 16px; padding: clamp(22px, 4vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 36px; align-items: center">
+      <div style="display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .22em; color: #FFB347">RUN THE NUMBERS</span>
+          <h3 style="margin: 0; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 54px; line-height: .85; text-transform: uppercase">What's tonight worth?</h3>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span id="crew-label" style="font-size: 15px; font-weight: 600">Members in the bay</span>
+          <div id="crewBtns" role="group" aria-labelledby="crew-label" style="display: flex; flex-wrap: wrap; gap: 8px">
+            
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span id="spend-label" style="font-size: 15px; font-weight: 600">Your spend tonight (bay share, food, pours)</span>
+          <div id="spendBtns" role="group" aria-labelledby="spend-label" style="display: flex; flex-wrap: wrap; gap: 8px">
+            
+          </div>
+        </div>
+      </div>
+      <div class="gr-led" style="position: relative; overflow: hidden; border: 2px solid #33445F; border-radius: 10px; padding: 26px; display: flex; flex-direction: column; gap: 18px" aria-live="polite">
+        <div class="gr-scan"></div>
+        <div style="position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: .2em; font-weight: 700">YOU EARN</span>
+            <span class="gr-glow" style="font-family: 'Doto', 'Courier New', monospace; font-weight: 900; font-size: clamp(40px, 5vw, 64px); line-height: 1; color: #FFB347"><span id="mine">1,125</span></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: .2em; font-weight: 700">CREW EARNS</span>
+            <span style="font-family: 'Doto', 'Courier New', monospace; font-weight: 900; font-size: clamp(40px, 5vw, 64px); line-height: 1; color: #F7DFB6"><span id="total">4,500</span></span>
+          </div>
+        </div>
+        <div style="position: relative; display: flex; align-items: center; gap: 10px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: .06em">
+          <span id="mult" style="background: #D9772B; color: #1B2A41; padding: 4px 10px; border-radius: 3px">1.5X</span>
+          <span><span id="bonusText">Crew Bonus on for all 4</span></span>
+        </div>
+        <p style="position: relative; margin: 0; font-size: 15px; line-height: 1.5; color: #E9DCC0"><span id="firstText"></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REWARDS: THE FIELD ================= -->
+<section id="rewards" style="background: #F7DFB6; color: #1B2A41">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 110px 24px; display: flex; flex-direction: column; gap: 44px">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .22em; color: #934615">REWARDS</span>
+        <h2 style="margin: 0; font-family: 'Teko', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(60px, 7.5vw, 112px); line-height: .8; text-transform: uppercase; transform: skewX(-6deg)">Drive down<br><span style="color: #0E4A47">the field.</span></h2>
+      </div>
+      <p style="margin: 0; max-width: 400px; font-size: 18px; line-height: 1.5">Redeem early, redeem often. The first stop comes fast. The end zone is for the whole crew.</p>
+    </div>
+
+    <!-- field -->
+    <div style="overflow-x: auto; border-radius: 16px">
+      <div role="img" aria-label="Rewards field: you start at 500 points. Free pour at 1,000, 30 free minutes at 2,000, a free hour at 4,000, and Crew Night in the end zone at 7,500." style="position: relative; min-width: 900px; height: 300px; border-radius: 16px; overflow: hidden; background-color: #0B5145; background-image: repeating-linear-gradient(90deg, rgba(247,223,182,.55) 0 3px, transparent 3px 8.6%), repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 4.3%, transparent 4.3% 8.6%)">
+        <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 6%; background: #0E4A47; display: flex; align-items: center; justify-content: center"><span style="writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Teko', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: .14em; color: #F7DFB6">START</span></div>
+        <div style="position: absolute; right: 0; top: 0; bottom: 0; width: 8%; background: #D9772B; display: flex; align-items: center; justify-content: center"><span style="writing-mode: vertical-rl; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 34px; letter-spacing: .12em; color: #1B2A41">CREW NIGHT</span></div>
+        <!-- you are here -->
+        <div style="position: absolute; left: 11.7%; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 8px">
+          <svg aria-hidden="true" class="gr-pulse" viewBox="0 0 60 36" style="width: 54px; border-radius: 50%"><ellipse cx="30" cy="18" rx="28" ry="16" fill="#7A3E14"></ellipse><path d="M18 18 H42 M24 14 V22 M30 14 V22 M36 14 V22" stroke="#F7DFB6" stroke-width="2.5"></path></svg>
+          <span style="background: #05080D; color: #FFB347; font-family: 'Doto', monospace; font-weight: 900; font-size: 16px; padding: 4px 8px; border-radius: 4px; white-space: nowrap">YOU · 500</span>
+        </div>
+        <!-- stops -->
+        <div style="position: absolute; left: 17.5%; top: 22px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center"><span style="background: #F7DFB6; color: #1B2A41; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 26px; line-height: 1; padding: 6px 12px 2px; border-radius: 6px">1,000</span><span style="width: 3px; height: 200px; background: #F7DFB6"></span></div>
+        <div style="position: absolute; left: 28.9%; top: 22px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center"><span style="background: #F7DFB6; color: #1B2A41; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 26px; line-height: 1; padding: 6px 12px 2px; border-radius: 6px">2,000</span><span style="width: 3px; height: 200px; background: #F7DFB6"></span></div>
+        <div style="position: absolute; left: 51.9%; top: 22px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center"><span style="background: #F7DFB6; color: #1B2A41; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 26px; line-height: 1; padding: 6px 12px 2px; border-radius: 6px">4,000</span><span style="width: 3px; height: 200px; background: #F7DFB6"></span></div>
+        <div style="position: absolute; left: 88%; top: 22px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center"><span style="background: #1B2A41; color: #FFB347; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 26px; line-height: 1; padding: 6px 12px 2px; border-radius: 6px">7,500</span><span style="width: 3px; height: 200px; background: #1B2A41"></span></div>
+        <div style="position: absolute; left: 6%; right: 8%; bottom: 22px; display: flex; justify-content: space-around; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 28px; color: rgba(247,223,182,.55)"><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span><span>40</span><span>30</span><span>20</span><span>10</span></div>
+      </div>
+    </div>
+
+    <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 18px">
+      <li class="gr-lift" style="background: #FFFFFF; border: 2px solid #1B2A41; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#0E4A47" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l-1.5 17a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1z"></path><path d="M6.5 8h11"></path></svg>
+        <span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 34px; line-height: 1; color: #0E4A47">1,000</span>
+        <h3 style="margin: 0; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 36px; line-height: .85; text-transform: uppercase">Free pour</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.4">One pour from the beer wall.</p>
+      </li>
+      <li class="gr-lift" style="background: #FFFFFF; border: 2px solid #1B2A41; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#0E4A47" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14" r="7"></circle><path d="M12 14V10M10 3h4M12 3v4"></path></svg>
+        <span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 34px; line-height: 1; color: #0E4A47">2,000</span>
+        <h3 style="margin: 0; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 36px; line-height: .85; text-transform: uppercase">30 free minutes</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.4">Half an hour of bay time on us.</p>
+      </li>
+      <li class="gr-lift" style="background: #0E4A47; color: #F7DFB6; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#FFB347" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+        <span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 34px; line-height: 1; color: #FFB347">4,000</span>
+        <h3 style="margin: 0; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 36px; line-height: .85; text-transform: uppercase">A free hour</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.4">A full hour of bay time.</p>
+      </li>
+      <li class="gr-lift" style="position: relative; overflow: hidden; background: #1B2A41; color: #F7DFB6; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px; box-shadow: inset 0 0 0 3px #D9772B">
+        <span class="gr-shine"></span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#FFB347" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"></path><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M9 17h6"></path></svg>
+        <span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 34px; line-height: 1; color: #FFB347">7,500</span>
+        <h3 style="margin: 0; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 36px; line-height: .85; text-transform: uppercase">Crew Night</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.4">A bay hour plus a round from the beer wall for your whole crew.</p>
+      </li>
+    </ol>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; background: #1B2A41; color: #F7DFB6; border-radius: 14px; padding: 22px 28px">
+      <span style="font-family: 'Teko', sans-serif; font-weight: 700; font-size: 30px; line-height: 1; text-transform: uppercase; color: #FFB347">Scouting report</span>
+      <span style="font-size: 17px; line-height: 1.5; flex: 1 1 420px">A typical player hits a free pour on visit 1, 30 free minutes on visit 2, and a free hour around visit 5. Bay-time rewards are good Sunday through Thursday.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIERS: TRADING CARDS ================= -->
+<section id="tiers" style="position: relative; overflow: hidden; background: radial-gradient(ellipse at 70% 30%, #0E4A47 0%, #071A1F 60%)">
+  <div aria-hidden="true" class="gr-beam" style="position: absolute; top: -40px; right: 18%; width: 520px; height: 120%; background: linear-gradient(180deg, rgba(255,236,190,.22), rgba(255,236,190,0) 75%); clip-path: polygon(45% 0, 55% 0, 100% 100%, 0 100%)"></div>
+  <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 110px 24px 120px; display: flex; flex-direction: column; gap: 56px">
+    <div style="display: flex; flex-direction: column; gap: 10px; max-width: 820px">
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .22em; color: #FFB347">STATUS</span>
+      <h2 style="margin: 0; font-family: 'Teko', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(60px, 7.5vw, 112px); line-height: .8; text-transform: uppercase; transform: skewX(-6deg)">Anyone can join.<br><span style="color: #D9772B">Franchise is earned.</span></h2>
+      <p style="margin: 0; font-size: 18px; line-height: 1.55">Status runs on visits per year. Your jersey number is how many it takes.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 32px; align-items: end">
+      <!-- ROOKIE -->
+      <article class="gr-lift" style="transform: rotate(-3deg) translateY(36px); background: #F7DFB6; border-radius: 16px; padding: 10px; box-shadow: 0 30px 50px rgba(0,0,0,.45)">
+        <div style="background: #0E4A47; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: #00625A">
+            <span style="font-family: 'Graduate', serif; font-size: 28px; color: #F7DFB6">ROOKIE</span>
+            <span style="font-family: 'Teko', sans-serif; font-weight: 700; font-size: 22px; line-height: 1; background: #D9772B; color: #1B2A41; padding: 4px 8px 0; border-radius: 4px">RC</span>
+          </div>
+          <div style="height: 210px; display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(135deg, rgba(247,223,182,.06) 0 12px, transparent 12px 24px)">
+            <svg role="img" aria-label="Rookie jersey number 00" viewBox="0 0 200 200" style="width: 180px"><path d="M60 22 L85 12 C92 28 108 28 115 12 L140 22 L186 52 L166 92 L146 82 L146 186 L54 186 L54 82 L34 92 L14 52 Z" fill="#071A1F" stroke="#F7DFB6" stroke-width="4"></path><text x="100" y="150" text-anchor="middle" font-family="Graduate, serif" font-size="66" fill="#F7DFB6">00</text></svg>
+          </div>
+          <div style="padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 12px; color: #F7DFB6">
+            <div style="display: flex; justify-content: space-between; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .16em; border-bottom: 1px solid rgba(247,223,182,.25); padding-bottom: 10px"><span>TIER 1</span><span>REQ: JOIN</span></div>
+            <ul style="margin: 0; padding: 0 0 0 18px; display: flex; flex-direction: column; gap: 6px; font-size: 16px; line-height: 1.4">
+              <li>10 points per $1</li>
+              <li>Crew Bonus: 1.5x with 4+</li>
+              <li>Call-Up Bonus: +250 per friend</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      <!-- STARTER -->
+      <article class="gr-lift" style="transform: rotate(0deg) translateY(10px); background: linear-gradient(135deg, #E6EBF0, #9AA7B4, #E6EBF0); border-radius: 16px; padding: 10px; box-shadow: 0 30px 50px rgba(0,0,0,.45)">
+        <div style="background: #F7DFB6; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; color: #1B2A41">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: #1B2A41">
+            <span style="font-family: 'Graduate', serif; font-size: 28px; color: #F7DFB6">STARTER</span>
+            <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .16em; color: #FFB347">TIER 2</span>
+          </div>
+          <div style="height: 210px; display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(135deg, rgba(14,74,71,.08) 0 12px, transparent 12px 24px)">
+            <svg role="img" aria-label="Starter jersey number 05" viewBox="0 0 200 200" style="width: 180px"><path d="M60 22 L85 12 C92 28 108 28 115 12 L140 22 L186 52 L166 92 L146 82 L146 186 L54 186 L54 82 L34 92 L14 52 Z" fill="#0E4A47" stroke="#1B2A41" stroke-width="4"></path><path d="M14 52 L34 92 M186 52 L166 92" stroke="#D9772B" stroke-width="8"></path><text x="100" y="150" text-anchor="middle" font-family="Graduate, serif" font-size="66" fill="#F7DFB6">05</text></svg>
+          </div>
+          <div style="padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 12px">
+            <div style="display: flex; justify-content: space-between; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .16em; border-bottom: 1px solid rgba(27,42,65,.25); padding-bottom: 10px"><span>EVERYTHING IN ROOKIE +</span><span>5 VISITS</span></div>
+            <div style="display: flex; align-items: center; gap: 14px">
+              <span style="font-family: 'Doto', monospace; font-weight: 900; font-size: 40px; line-height: 1; color: #0E4A47">48H</span>
+              <span style="font-size: 16px; line-height: 1.4; font-weight: 600">Book Friday and Saturday bays before everyone else.</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- FRANCHISE -->
+      <article class="gr-lift" style="position: relative; transform: rotate(3deg) translateY(-10px); background: linear-gradient(135deg, #D9772B, #FFE1A8, #D9772B, #8A3F12, #FFD08A); border-radius: 16px; padding: 10px; box-shadow: 0 0 60px rgba(255,170,70,.35), 0 30px 50px rgba(0,0,0,.5)">
+        <span class="gr-shine"></span>
+        <div style="background: #1B2A41; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; color: #F7DFB6">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: #05080D">
+            <span style="font-family: 'Graduate', serif; font-size: 28px; color: #FFB347">FRANCHISE</span>
+            <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .16em; color: #1B2A41; background: linear-gradient(90deg, #FFB347, #FFE1A8); padding: 4px 8px; border-radius: 4px">HOLO · TIER 3</span>
+          </div>
+          <div style="height: 210px; position: relative; display: flex; align-items: center; justify-content: center; background: conic-gradient(from 200deg at 50% 60%, rgba(217,119,43,.35), rgba(0,98,90,.35), rgba(255,225,168,.3), rgba(217,119,43,.35))">
+            <svg role="img" aria-label="Franchise jersey number 12 with a crown" viewBox="0 0 200 200" style="width: 190px; filter: drop-shadow(0 0 16px rgba(255,179,71,.5))"><path d="M78 6 L88 20 L100 4 L112 20 L122 6 L120 26 H80 Z" fill="#FFB347"></path><path d="M60 30 L85 20 C92 36 108 36 115 20 L140 30 L186 60 L166 100 L146 90 L146 194 L54 194 L54 90 L34 100 L14 60 Z" fill="#D9772B" stroke="#FFE1A8" stroke-width="4"></path><path d="M54 120 H146 M54 132 H146" stroke="#1B2A41" stroke-width="6"></path><text x="100" y="178" text-anchor="middle" font-family="Graduate, serif" font-size="56" fill="#1B2A41">12</text></svg>
+          </div>
+          <div style="padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; justify-content: space-between; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .16em; border-bottom: 1px solid rgba(247,223,182,.25); padding-bottom: 10px"><span>EVERYTHING IN STARTER +</span><span style="color: #FFB347">12 VISITS</span></div>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.4">
+              <li style="display: flex; gap: 10px"><span style="color: #FFB347">★</span><span>Your name on the <strong>Draft Board wall</strong></span></li>
+              <li style="display: flex; gap: 10px"><span style="color: #FFB347">★</span><span>A <strong>members-only tap</strong> at the beer wall</span></li>
+              <li style="display: flex; gap: 10px"><span style="color: #FFB347">★</span><span>A <strong>free bay on your birthday</strong></span></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; border: 2px dashed rgba(247,223,182,.4); border-radius: 14px; padding: 22px 28px; margin-top: 24px">
+      <span style="font-family: 'Teko', sans-serif; font-weight: 700; font-size: 36px; line-height: 1; text-transform: uppercase; color: #FFB347">Soft landing</span>
+      <div aria-hidden="true" style="display: flex; align-items: center; gap: 10px; font-family: 'Graduate', serif; font-size: 15px">
+        <span style="background: #D9772B; color: #1B2A41; padding: 6px 10px; border-radius: 4px">FRANCHISE</span><span>→</span><span style="background: #F7DFB6; color: #1B2A41; padding: 6px 10px; border-radius: 4px">STARTER</span><span style="color: #FF6B3D; font-family: 'Teko', sans-serif; font-size: 26px">✕</span><span style="border: 1px solid rgba(247,223,182,.5); padding: 6px 10px; border-radius: 4px; text-decoration: line-through">ROOKIE</span>
+      </div>
+      <span style="font-size: 17px; line-height: 1.5; flex: 1 1 300px">Miss your visit count and you drop at most one tier a year. Nobody gets sent straight back to Rookie.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL SCOREBOARD JUMBOTRON ================= -->
+<section id="scoreboard" style="position: relative; overflow: hidden; background: #05080D">
+  <div aria-hidden="true" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1100px; height: 700px; background: radial-gradient(ellipse at 50% 0%, rgba(255,170,70,.18), transparent 65%)"></div>
+  <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 110px 24px 120px; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center">
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .22em; color: #FFB347">THE FINAL SCOREBOARD</span>
+      <h2 style="margin: 0; font-family: 'Teko', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(60px, 8vw, 128px); line-height: .8; text-transform: uppercase; transform: skewX(-6deg)">Every night ends<br>with a <span style="color: #D9772B">call-up.</span></h2>
+      <p style="margin: 0; max-width: 640px; font-size: 18px; line-height: 1.55">Before the bill comes, your bay screen crowns tonight's MVP and shows what every player earned. Far from a reward, you see a progress bar. Close to one, you see the exact number.</p>
+    </div>
+
+    <!-- jumbotron -->
+    <div style="position: relative; padding-top: 56px">
+      <div aria-hidden="true" style="position: absolute; top: 0; left: 4%; right: 4%; height: 20px; background: repeating-linear-gradient(45deg, #2A3A55 0 8px, #1B2A41 8px 16px); border: 2px solid #3A4C6B; border-radius: 3px"></div>
+      <div aria-hidden="true" style="position: absolute; top: 20px; left: 14%; width: 4px; height: 36px; background: #3A4C6B"></div>
+      <div aria-hidden="true" style="position: absolute; top: 20px; left: 50%; width: 4px; height: 36px; background: #3A4C6B"></div>
+      <div aria-hidden="true" style="position: absolute; top: 20px; right: 14%; width: 4px; height: 36px; background: #3A4C6B"></div>
+      <figure style="margin: 0; background: #1B2A41; border: 3px solid #3A4C6B; border-radius: 16px; padding: 14px; box-shadow: 0 0 120px rgba(255,160,60,.25), 0 50px 80px rgba(0,0,0,.6)">
+        <div role="img" aria-label="Jumbotron Final Scoreboard: Bay 4 final. Tonight's MVP is Maya. Maya plus 1,140, 120 points to a free hour. Jordan plus 960. Dev plus 870, 90 points to a free pour. Sam plus 720. Crew Bonus 1.5x active." class="gr-led" style="position: relative; overflow: hidden; border-radius: 8px">
+          <div class="gr-scan"></div>
+          <div style="position: relative; display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; border-bottom: 1px solid #1F2C42; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: .2em; font-size: 14px">
+            <span>BAY 04 · THURSDAY</span>
+            <span style="color: #FF6B3D"><span class="gr-blink">●</span> FINAL</span>
+          </div>
+          <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 0">
+            <div style="padding: clamp(22px, 3vw, 36px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; background: radial-gradient(circle at 50% 40%, rgba(255,179,71,.18), transparent 65%)">
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="#FFB347" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18"></path><path d="M3 18 4.5 7l5 4.5L12 5l2.5 6.5 5-4.5L21 18"></path></svg>
+              <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: .3em; color: #F7DFB6">TONIGHT'S MVP</span>
+              <span class="gr-glow" style="font-family: 'Doto', 'Courier New', monospace; font-weight: 900; font-size: clamp(64px, 9vw, 120px); line-height: .9; color: #FFB347">MAYA</span>
+              <span style="font-family: 'Teko', sans-serif; font-weight: 600; font-size: 26px; color: #F7DFB6">+1,140 PTS TONIGHT</span>
+            </div>
+            <div style="padding: clamp(22px, 3vw, 36px); display: flex; flex-direction: column; gap: 18px; border-left: 1px solid #1F2C42">
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; justify-content: space-between; font-family: 'Doto', monospace; font-weight: 900; font-size: 24px"><span style="color: #FFFFFF">MAYA</span><span style="color: #FFB347">+1,140</span></div>
+                <div style="height: 10px; background: #1F2C42; border-radius: 5px; overflow: hidden"><div class="gr-fill" style="width: 97%; height: 100%; background: linear-gradient(90deg, #D9772B, #FFB347)"></div></div>
+                <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .12em; color: #FFB347">120 PTS TO A FREE HOUR</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; justify-content: space-between; font-family: 'Doto', monospace; font-weight: 900; font-size: 24px"><span style="color: #FFFFFF">JORDAN</span><span style="color: #FFB347">+960</span></div>
+                <div style="height: 10px; background: #1F2C42; border-radius: 5px; overflow: hidden"><div class="gr-fill" style="width: 58%; height: 100%; background: #3BA399; animation-delay: .3s"></div></div>
+                <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .12em; color: #B9C3D3">ON TRACK FOR 30 FREE MINUTES</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; justify-content: space-between; font-family: 'Doto', monospace; font-weight: 900; font-size: 24px"><span style="color: #FFFFFF">DEV</span><span style="color: #FFB347">+870</span></div>
+                <div style="height: 10px; background: #1F2C42; border-radius: 5px; overflow: hidden"><div class="gr-fill" style="width: 91%; height: 100%; background: linear-gradient(90deg, #D9772B, #FFB347); animation-delay: .6s"></div></div>
+                <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .12em; color: #FFB347">90 PTS TO A FREE POUR</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; justify-content: space-between; font-family: 'Doto', monospace; font-weight: 900; font-size: 24px"><span style="color: #FFFFFF">SAM</span><span style="color: #FFB347">+720</span></div>
+                <div style="height: 10px; background: #1F2C42; border-radius: 5px; overflow: hidden"><div class="gr-fill" style="width: 34%; height: 100%; background: #3BA399; animation-delay: .9s"></div></div>
+                <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .12em; color: #B9C3D3">ON TRACK FOR CREW NIGHT</span>
+              </div>
+            </div>
+          </div>
+          <div aria-hidden="true" style="position: relative; overflow: hidden; background: #D9772B; padding: 8px 0">
+            <div class="gr-marquee-fast" style="font-family: 'Doto', monospace; font-weight: 900; font-size: 20px; color: #1B2A41; white-space: nowrap">
+              <span style="padding-right: 40px">CREW BONUS 1.5X ACTIVE ★ MAYA: 120 PTS TO A FREE HOUR ★ DEV: 90 PTS TO A FREE POUR ★ SEE YOU NEXT WEEK ★</span>
+              <span style="padding-right: 40px">CREW BONUS 1.5X ACTIVE ★ MAYA: 120 PTS TO A FREE HOUR ★ DEV: 90 PTS TO A FREE POUR ★ SEE YOU NEXT WEEK ★</span>
+            </div>
+          </div>
+        </div>
+        <figcaption style="font-size: 13px; color: #B9C3D3; padding: 10px 6px 0">Mock bay screen. Names and numbers are examples.</figcaption>
+      </figure>
+    </div>
+
+    <!-- SURPRISE DROP TICKET -->
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: center">
+      <div class="gr-float" style="--r: -3deg; position: relative; display: flex; width: 100%; max-width: 640px; filter: drop-shadow(0 26px 34px rgba(0,0,0,.55))">
+        <div style="position: relative; flex: 1 1 auto; background: #D9772B; color: #1B2A41; border-radius: 14px 0 0 14px; padding: 28px 30px 26px 40px; display: flex; flex-direction: column; gap: 8px; overflow: hidden">
+          <span aria-hidden="true" style="position: absolute; left: -16px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 50%; background: #05080D"></span>
+          <span aria-hidden="true" style="position: absolute; inset: 8px; border: 2px solid rgba(27,42,65,.35); border-radius: 8px; pointer-events: none"></span>
+          <span style="position: relative; display: flex; justify-content: space-between; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .22em"><span>SURPRISE DROP</span><span>DRAFT DAY</span></span>
+          <span style="position: relative; font-family: 'Teko', sans-serif; font-weight: 700; font-size: clamp(64px, 8vw, 92px); line-height: .78; text-transform: uppercase">On us.</span>
+          <span style="position: relative; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: .9; text-transform: uppercase">Thanks for coming back.</span>
+          <span style="position: relative; font-size: 15px; line-height: 1.45; font-weight: 500; max-width: 360px">Every so often a free round pops up on your bay screen. No strings attached.</span>
+          <span style="position: relative; display: flex; gap: 18px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .14em; padding-top: 6px"><span>SEC GR</span><span>BAY 04</span><span>SEAT: WHOLE CREW</span></span>
+        </div>
+        <div style="position: relative; flex: 0 0 120px; background: #F7DFB6; color: #1B2A41; border-radius: 0 14px 14px 0; border-left: 3px dashed #1B2A41; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 18px 10px">
+          <span aria-hidden="true" style="position: absolute; top: -14px; left: -16px; width: 28px; height: 28px; border-radius: 50%; background: #05080D"></span>
+          <span aria-hidden="true" style="position: absolute; bottom: -14px; left: -16px; width: 28px; height: 28px; border-radius: 50%; background: #05080D"></span>
+          <span style="writing-mode: vertical-rl; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: .1em; line-height: 1">ADMIT ONE ROUND</span>
+          <span aria-hidden="true" style="width: 70px; height: 34px; background: repeating-linear-gradient(90deg, #1B2A41 0 2px, transparent 2px 4px, #1B2A41 4px 7px, transparent 7px 9px, #1B2A41 9px 10px, transparent 10px 13px)"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RULES ================= -->
+<section id="rules" style="background: #F7DFB6; color: #1B2A41">
+  <div aria-hidden="true" style="height: 14px; background: repeating-linear-gradient(90deg, #1B2A41 0 22px, #F7DFB6 22px 44px)"></div>
+  <div style="max-width: 1280px; margin: 0 auto; padding: 100px 24px; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .22em; color: #934615">THE RULEBOOK</span>
+      <h2 style="margin: 0; font-family: 'Teko', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(60px, 7.5vw, 112px); line-height: .8; text-transform: uppercase; transform: skewX(-6deg)">The fine print,<br><span style="color: #0E4A47">in plain English.</span></h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 0 44px; border-top: 4px solid #1B2A41">
+      <div style="display: flex; flex-direction: column">
+        <details style="border-bottom: 1px solid rgba(27,42,65,.3); padding: 20px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: 1; text-transform: uppercase"><span>Who can join?</span><span aria-hidden="true" class="gr-plus" style="font-size: 34px; color: #934615">+</span></summary><p style="margin: 12px 0 0; font-size: 17px; line-height: 1.55">Anyone. It's free and takes about 30 seconds with your phone number. Beer wall rewards are for guests of legal drinking age.</p></details>
+        <details style="border-bottom: 1px solid rgba(27,42,65,.3); padding: 20px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: 1; text-transform: uppercase"><span>How do I earn points?</span><span aria-hidden="true" class="gr-plus" style="font-size: 34px; color: #934615">+</span></summary><p style="margin: 12px 0 0; font-size: 17px; line-height: 1.55">10 points for every $1 you spend on bay time, food and the beer wall. Everyone earns on their own account, on what they spend.</p></details>
+        <details style="border-bottom: 1px solid rgba(27,42,65,.3); padding: 20px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: 1; text-transform: uppercase"><span>How does the Crew Bonus work?</span><span aria-hidden="true" class="gr-plus" style="font-size: 34px; color: #934615">+</span></summary><p style="margin: 12px 0 0; font-size: 17px; line-height: 1.55">When 4 or more members play in the same bay, everyone in that bay earns 1.5x points for the night.</p></details>
+        <details style="border-bottom: 1px solid rgba(27,42,65,.3); padding: 20px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: 1; text-transform: uppercase"><span>How do referrals count?</span><span aria-hidden="true" class="gr-plus" style="font-size: 34px; color: #934615">+</span></summary><p style="margin: 12px 0 0; font-size: 17px; line-height: 1.55">When a friend joins through the booking link you shared in the group chat, you each get 250 points. That's the Call-Up Bonus.</p></details>
+        <details style="border-bottom: 1px solid rgba(27,42,65,.3); padding: 20px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: 1; text-transform: uppercase"><span>Do my points expire?</span><span aria-hidden="true" class="gr-plus" style="font-size: 34px; color: #934615">+</span></summary><p style="margin: 12px 0 0; font-size: 17px; line-height: 1.55">Never, as long as you visit at least once a year.</p></details>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <details style="border-bottom: 1px solid rgba(27,42,65,.3); padding: 20px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: 1; text-transform: uppercase"><span>When can I use bay-time rewards?</span><span aria-hidden="true" class="gr-plus" style="font-size: 34px; color: #934615">+</span></summary><p style="margin: 12px 0 0; font-size: 17px; line-height: 1.55">Sunday through Thursday. That covers 30 free minutes, a free hour and Crew Night.</p></details>
+        <details style="border-bottom: 1px solid rgba(27,42,65,.3); padding: 20px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: 1; text-transform: uppercase"><span>How do I move up a tier?</span><span aria-hidden="true" class="gr-plus" style="font-size: 34px; color: #934615">+</span></summary><p style="margin: 12px 0 0; font-size: 17px; line-height: 1.55">Tiers are based on visits per year. Everyone starts as a Rookie. Hit 5 visits to become a Starter, 12 to become Franchise.</p></details>
+        <details style="border-bottom: 1px solid rgba(27,42,65,.3); padding: 20px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: 1; text-transform: uppercase"><span>What if I miss my visit count?</span><span aria-hidden="true" class="gr-plus" style="font-size: 34px; color: #934615">+</span></summary><p style="margin: 12px 0 0; font-size: 17px; line-height: 1.55">Soft landing: you drop at most one tier per year. A Franchise member who slows down becomes a Starter, never straight back to Rookie.</p></details>
+        <details style="border-bottom: 1px solid rgba(27,42,65,.3); padding: 20px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: 1; text-transform: uppercase"><span>When do tiers reset?</span><span aria-hidden="true" class="gr-plus" style="font-size: 34px; color: #934615">+</span></summary><p style="margin: 12px 0 0; font-size: 17px; line-height: 1.55">Your visit count resets once a year, on [RESET DATE]. Your tier is then set by last year's visits, with the soft landing applied.</p></details>
+        <details style="border-bottom: 1px solid rgba(27,42,65,.3); padding: 20px 0"><summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Teko', sans-serif; font-weight: 600; font-size: 30px; line-height: 1; text-transform: uppercase"><span>What are surprise drops?</span><span aria-hidden="true" class="gr-plus" style="font-size: 34px; color: #934615">+</span></summary><p style="margin: 12px 0 0; font-size: 17px; line-height: 1.55">Every so often a free round pops up on your bay screen. You can't earn them or chase them. They just happen. Thanks for coming back.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLOSING CTA ================= -->
+<section id="join" style="position: relative; overflow: hidden; background: radial-gradient(ellipse at 50% 0%, #0E4A47 0%, #071A1F 65%)">
+  <div aria-hidden="true" class="gr-beam" style="position: absolute; top: -20px; left: 10%; width: 460px; height: 130%; background: linear-gradient(180deg, rgba(255,236,190,.26), rgba(255,236,190,0) 70%); clip-path: polygon(6% 0, 12% 0, 100% 100%, 0 100%); transform: rotate(-20deg); transform-origin: top left"></div>
+  <div aria-hidden="true" class="gr-beam" style="position: absolute; top: -20px; right: 10%; width: 460px; height: 130%; background: linear-gradient(180deg, rgba(255,236,190,.26), rgba(255,236,190,0) 70%); clip-path: polygon(88% 0, 94% 0, 100% 100%, 0 100%); transform: rotate(20deg); transform-origin: top right; animation-delay: 2s"></div>
+  <div style="position: relative; max-width: 1280px; margin: 0 auto; padding: 120px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 48px; align-items: center">
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: .22em; color: #FFB347"><span class="gr-blink">●</span> YOU'RE ON THE CLOCK · <span data-clock>04:59</span></span>
+      <h2 style="margin: 0; font-family: 'Teko', 'Arial Narrow', sans-serif; font-weight: 700; font-size: clamp(68px, 9vw, 140px); line-height: .78; text-transform: uppercase; transform: skewX(-6deg)">Your crew's next night out <span style="color: #D9772B">starts here.</span></h2>
+    </div>
+    <form style="position: relative; display: flex; filter: drop-shadow(0 30px 40px rgba(0,0,0,.5))">
+      <div style="flex: 1 1 auto; background: #F7DFB6; color: #1B2A41; border-radius: 14px 0 0 14px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .22em; color: #934615">MEMBER PASS · ROOKIE</span>
+        <span style="font-family: 'Teko', sans-serif; font-weight: 700; font-size: 44px; line-height: .85; text-transform: uppercase">Join free, get 500 points</span>
+        <label for="phone" style="font-size: 15px; font-weight: 600">Phone number</label>
+        <input id="phone" type="tel" autocomplete="tel" placeholder="(555) 555-0123" style="font-family: 'Barlow', sans-serif; font-size: 18px; padding: 14px 16px; border: 2px solid #1B2A41; border-radius: 6px; background: #FFFFFF; color: #1B2A41; min-height: 50px; box-sizing: border-box">
+        <button type="button" style="font-family: 'Barlow Condensed', sans-serif; background: #D9772B; color: #1B2A41; border: 0; border-radius: 6px; font-size: 20px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 16px 20px; min-height: 54px; cursor: pointer">Get called up</button>
+        <span style="font-size: 14px">Takes 30 seconds. Your first pour is basically on us.</span>
+      </div>
+      <div aria-hidden="true" style="flex: 0 0 74px; background: #D9772B; border-radius: 0 14px 14px 0; border-left: 3px dashed #1B2A41; display: flex; align-items: center; justify-content: center">
+        <span style="writing-mode: vertical-rl; font-family: 'Teko', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: .14em; color: #1B2A41">ADMIT THE CREW</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="gr-led" style="border-top: 4px solid #D9772B">
+  <div style="max-width: 1280px; margin: 0 auto; padding: 40px 24px; display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; align-items: flex-start; font-size: 14px; line-height: 1.6">
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-family: 'Teko', sans-serif; font-weight: 700; font-size: 34px; line-height: .9">DRAFT DAY</span>
+      <span>The Green Room is Draft Day's loyalty program.</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: .18em; color: #FFB347">BAY RATES · PER BAY, PER HOUR, UP TO 6</span>
+      <span>Mon–Wed $30 · Thu &amp; Sun $60 · Fri &amp; Sat $75</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var secs = 299;
+  function tick(){
+    var t = String(Math.floor(secs/60)).padStart(2,'0') + ':' + String(secs%60).padStart(2,'0');
+    document.querySelectorAll('[data-clock]').forEach(function(el){ el.textContent = t; });
+    secs = secs <= 0 ? 299 : secs - 1;
+  }
+  tick(); setInterval(tick, 1000);
+
+  var state = { crew: 4, spend: 50 };
+  var base = "font-family: 'Teko', sans-serif; font-weight: 700; font-size: 26px; line-height: 1; min-width: 60px; min-height: 52px; padding: 6px 16px 0; border-radius: 6px; border: 2px solid; cursor: pointer;";
+  var on = 'background: #D9772B; color: #1B2A41; border-color: #D9772B;';
+  var off = 'background: transparent; color: #F7DFB6; border-color: rgba(247,223,182,0.5);';
+  function fmt(n){ return n.toLocaleString('en-US'); }
+  function buttons(id, values, key, label){
+    var wrap = document.getElementById(id);
+    values.forEach(function(v){
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = label(v); b.dataset.v = v;
+      b.addEventListener('click', function(){ state[key] = v; render(); });
+      wrap.appendChild(b);
+    });
+  }
+  buttons('crewBtns', [2,3,4,5,6], 'crew', function(v){ return String(v); });
+  buttons('spendBtns', [30,50,75], 'spend', function(v){ return '$' + v; });
+  function render(){
+    [['crewBtns','crew'],['spendBtns','spend']].forEach(function(p){
+      document.querySelectorAll('#' + p[0] + ' button').forEach(function(b){
+        var sel = Number(b.dataset.v) === state[p[1]];
+        b.setAttribute('aria-pressed', String(sel));
+        b.setAttribute('style', base + (sel ? on : off));
+      });
+    });
+    var bonus = state.crew >= 4;
+    var mine = Math.round(state.spend * 10 * (bonus ? 1.5 : 1));
+    document.getElementById('mine').textContent = fmt(mine);
+    document.getElementById('total').textContent = fmt(mine * state.crew);
+    var m = document.getElementById('mult');
+    m.textContent = bonus ? '1.5X' : '1X';
+    m.style.background = bonus ? '#D9772B' : '#33445F';
+    m.style.color = bonus ? '#1B2A41' : '#F7DFB6';
+    var need = 4 - state.crew;
+    document.getElementById('bonusText').textContent = bonus ? 'Crew Bonus on for all ' + state.crew : 'Add ' + need + ' more member' + (need > 1 ? 's' : '') + ' for 1.5x';
+    var first = mine + 500;
+    var tiers = [[7500,'Crew Night'],[4000,'a free hour'],[2000,'30 free minutes'],[1000,'a free pour']];
+    var hit = tiers.find(function(t){ return first >= t[0]; });
+    document.getElementById('firstText').textContent = 'First visit? Add your 500 join points and you leave with ' + fmt(first) + (hit ? ', enough for ' + hit[1] + '.' : '.');
+  }
+  render();
+})();
+</script>
+</body>
+</html>
